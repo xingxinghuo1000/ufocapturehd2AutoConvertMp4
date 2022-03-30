@@ -158,7 +158,7 @@ def convert_one_video(path):
             except:
                 print("remove orgin video error")
         return
-    cmd = r'''ffmpeg -i "{0}"  -c:v h264_qsv  -maxrate 2500k -strict -2  "{1}"'''.format(
+    cmd = r'''ffmpeg -i "{0}"  -c:v h264_qsv -b 15000k -strict -2  "{1}"'''.format(
         path, mp4_file)
     print("cmd: ", cmd)
     os.system(cmd)
@@ -179,7 +179,8 @@ def main_loop():
     while 1:
         current_minute = datetime.datetime.now().strftime("%H:%M")
         print("current time: ", datetime.datetime.now())
-        if current_minute > "0730":
+        print("current_minute: ", current_minute)
+        if current_minute > "07:30" and current_minute < "18:00":
             print("begin process_all")    
             process_all()
         print("now sleep 60 sec")
